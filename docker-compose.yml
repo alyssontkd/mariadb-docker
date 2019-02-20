@@ -1,0 +1,21 @@
+version: '3'
+services:
+  database:
+   image: mariadb:10.4.2-bionic
+   build: .
+   container_name: 'mariadb-vertenti'
+   command: mysqld --sql_mode=""
+   ports:
+        - "3306:3306"
+   expose:
+        - 3306       
+   volumes:
+        - /var/www/docker/mariadb-docker/database/conf.d:/etc/mysql/conf.d
+        - /var/www/docker/mariadb-docker/database/mysql.conf.d:/etc/mysql/mysql.conf.d
+        - /var/www/docker/mariadb-docker/database/data:/var/lib/mysql
+        - /var/www/docker/mariadb-docker/database/log:/var/log/
+   environment:
+        MYSQL_ROOT_PASSWORD: 12345678
+        #MYSQL_USER: usr_aplicacaodd
+        #MYSQL_PASSWORD: 12345678
+        MYSQL_DATABASE: glpi
